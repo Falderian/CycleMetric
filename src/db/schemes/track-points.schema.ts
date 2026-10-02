@@ -1,10 +1,10 @@
-import { date, integer } from "drizzle-orm/pg-core";
-import { activities } from "./activities.schema.js";
-import { dbSchema } from "./schema.js";
+import { date, integer } from 'drizzle-orm/pg-core';
+import { activities } from '@/db/schemes/activities.schema';
+import { dbSchema } from '@/db/schemes/schema';
 
-const trackPoints = dbSchema.table("track-points", {
+const trackPoints = dbSchema.table('track-points', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  activityId: integer("activity_id")
+  activityId: integer('activity_id')
     .notNull()
     .references(() => activities.id),
   createdAt: date(),

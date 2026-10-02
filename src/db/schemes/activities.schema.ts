@@ -1,7 +1,7 @@
-import { date, integer } from "drizzle-orm/pg-core";
-import { dbSchema } from "./schema.js";
+import { date, integer } from 'drizzle-orm/pg-core';
+import { dbSchema } from '@/db/schemes/schema';
 
-const activities = dbSchema.table("activities", {
+const activities = dbSchema.table('activities', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   createdAt: date().defaultNow(),
 });

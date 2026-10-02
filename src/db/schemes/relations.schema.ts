@@ -1,6 +1,6 @@
-import { defineRelations } from "drizzle-orm";
-import { activities } from "./activities.schema.js";
-import { trackPoints } from "./track-points.schema.js";
+import { defineRelations } from 'drizzle-orm';
+import { activities } from '@/db/schemes/activities.schema';
+import { trackPoints } from '@/db/schemes/track-points.schema';
 
 const relations = defineRelations({ activities, trackPoints }, (r) => ({
   activities: {
