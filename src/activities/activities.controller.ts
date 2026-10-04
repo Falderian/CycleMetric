@@ -1,16 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
 import { ActivitiesService } from '@/activities/activities.service';
+import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
 // import type { CreateActivityDto } from '@/activities/dto/create-activity.dto';
 // import type { UpdateActivityDto } from '@/activities/dto/update-activity.dto';
 
+@UseGuards(JwtAuthGuard)
 @Controller('activities')
 export class ActivitiesController {
   constructor(private readonly activitiesService: ActivitiesService) {}

@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DrizzleModule } from '@nestjs/drizzle';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { ActivitiesModule } from '@/activities/activities.module';
+import { AuthModule } from '@/auth/auth.module';
 import { DbModule } from '@/db/db.module';
 import { UsersModule } from './users/users.module.js';
 
@@ -16,6 +17,7 @@ import { UsersModule } from './users/users.module.js';
         connection: configService.getOrThrow<string>('DATABASE_URL'),
       }),
     }),
+    AuthModule,
     DbModule,
     ActivitiesModule,
     UsersModule,

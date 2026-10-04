@@ -3,7 +3,7 @@ import { dbSchema } from '@/db/schemes/schema';
 
 const users = dbSchema.table('users', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  login: varchar().notNull(),
+  login: varchar().notNull().unique(),
   password: varchar().notNull(),
   createdAt: date().defaultNow(),
 });
