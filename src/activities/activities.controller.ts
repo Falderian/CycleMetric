@@ -1,18 +1,30 @@
-import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ActivitiesService } from '@/activities/activities.service';
+import { CreateActivityDto } from '@/activities/dto/create-activity.dto';
+import type { JwtPayload } from '@/auth/auth.types';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
-// import type { CreateActivityDto } from '@/activities/dto/create-activity.dto';
-// import type { UpdateActivityDto } from '@/activities/dto/update-activity.dto';
+import { CurrentUser } from '@/common/utils';
 
 @UseGuards(JwtAuthGuard)
 @Controller('activities')
 export class ActivitiesController {
   constructor(private readonly activitiesService: ActivitiesService) {}
 
-  // @Post()
-  // create(@Body() createActivityDto: CreateActivityDto) {
-  //   return this.activitiesService.create(createActivityDto);
-  // }
+  @Post()
+  create(
+    @CurrentUser() user: JwtPayload,
+    @Body() createActivityDto: CreateActivityDto,
+  ) {
+    return this.activitiesService.create(user.sub, createActivityDto.type);
+  }
 
   @Get()
   findAll() {

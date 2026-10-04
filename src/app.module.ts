@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DrizzleModule } from '@nestjs/drizzle';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { ActivitiesModule } from '@/activities/activities.module';
 import { AuthModule } from '@/auth/auth.module';
 import { DbModule } from '@/db/db.module';
+import { LoggerMiddleware } from './common/request-logger.middleware.js';
 import { UsersModule } from './users/users.module.js';
 
 @Module({
@@ -22,7 +23,11 @@ import { UsersModule } from './users/users.module.js';
     ActivitiesModule,
     UsersModule,
   ],
-  controllers: [],
-  providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}
