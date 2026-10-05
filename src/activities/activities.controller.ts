@@ -12,6 +12,7 @@ import { CreateActivityDto } from '@/activities/dto/create-activity.dto';
 import type { JwtPayload } from '@/auth/auth.types';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
 import { CurrentUser } from '@/common/utils';
+import { CreateTrackPointDto } from './dto/track-points.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('activities')
@@ -19,11 +20,19 @@ export class ActivitiesController {
   constructor(private readonly activitiesService: ActivitiesService) {}
 
   @Post()
-  create(
+  async create(
     @CurrentUser() user: JwtPayload,
     @Body() createActivityDto: CreateActivityDto,
   ) {
-    return this.activitiesService.create(user.sub, createActivityDto.type);
+    return await this.activitiesService.create(
+      user.sub,
+      createActivityDto.type,
+    );
+  }
+
+  @Post('track-points')
+  async createTrackPoints(@Body() dto: CreateTrackPointDto) {
+    return await this.activitiesService.createTrackPoints(dto);
   }
 
   @Get()

@@ -1,1 +1,0 @@
-ALTER TABLE "cyclemetric"."users" ADD CONSTRAINT "users_login_key" UNIQUE("login");

@@ -1,8 +1,10 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "c2f13d6c-5331-4472-a549-0f15a36cda1e",
-  "prevIds": ["250b47cb-2ef5-4120-86d7-2cf5e8b46382"],
+  "id": "099344b6-519f-42b4-8534-7d608eb8c408",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
   "ddl": [
     {
       "isRlsEnabled": false,
@@ -45,14 +47,14 @@
       "table": "activities"
     },
     {
-      "type": "date",
+      "type": "varchar",
       "typeSchema": null,
-      "notNull": false,
+      "notNull": true,
       "dimensions": 0,
-      "default": "now()",
+      "default": null,
       "generated": null,
       "identity": null,
-      "name": "createdAt",
+      "name": "type",
       "entityType": "columns",
       "schema": "cyclemetric",
       "table": "activities"
@@ -66,6 +68,32 @@
       "generated": null,
       "identity": null,
       "name": "user_id",
+      "entityType": "columns",
+      "schema": "cyclemetric",
+      "table": "activities"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "createdAt",
+      "entityType": "columns",
+      "schema": "cyclemetric",
+      "table": "activities"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updatedAt",
       "entityType": "columns",
       "schema": "cyclemetric",
       "table": "activities"
@@ -106,19 +134,6 @@
       "table": "track-points"
     },
     {
-      "type": "date",
-      "typeSchema": null,
-      "notNull": false,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "createdAt",
-      "entityType": "columns",
-      "schema": "cyclemetric",
-      "table": "track-points"
-    },
-    {
       "type": "integer",
       "typeSchema": null,
       "notNull": true,
@@ -147,7 +162,7 @@
     {
       "type": "integer",
       "typeSchema": null,
-      "notNull": false,
+      "notNull": true,
       "dimensions": 0,
       "default": null,
       "generated": null,
@@ -160,7 +175,7 @@
     {
       "type": "integer",
       "typeSchema": null,
-      "notNull": false,
+      "notNull": true,
       "dimensions": 0,
       "default": null,
       "generated": null,
@@ -173,7 +188,7 @@
     {
       "type": "integer",
       "typeSchema": null,
-      "notNull": false,
+      "notNull": true,
       "dimensions": 0,
       "default": null,
       "generated": null,
@@ -186,12 +201,25 @@
     {
       "type": "integer",
       "typeSchema": null,
-      "notNull": false,
+      "notNull": true,
       "dimensions": 0,
       "default": null,
       "generated": null,
       "identity": null,
       "name": "altitudeAccuracy",
+      "entityType": "columns",
+      "schema": "cyclemetric",
+      "table": "track-points"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "createdAt",
       "entityType": "columns",
       "schema": "cyclemetric",
       "table": "track-points"
@@ -245,7 +273,7 @@
       "table": "users"
     },
     {
-      "type": "date",
+      "type": "timestamp",
       "typeSchema": null,
       "notNull": false,
       "dimensions": 0,
@@ -259,10 +287,14 @@
     },
     {
       "nameExplicit": false,
-      "columns": ["user_id"],
+      "columns": [
+        "user_id"
+      ],
       "schemaTo": "cyclemetric",
       "tableTo": "users",
-      "columnsTo": ["id"],
+      "columnsTo": [
+        "id"
+      ],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "activities_user_id_users_id_fkey",
@@ -272,10 +304,14 @@
     },
     {
       "nameExplicit": false,
-      "columns": ["activity_id"],
+      "columns": [
+        "activity_id"
+      ],
       "schemaTo": "cyclemetric",
       "tableTo": "activities",
-      "columnsTo": ["id"],
+      "columnsTo": [
+        "id"
+      ],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "track-points_activity_id_activities_id_fkey",
@@ -284,7 +320,9 @@
       "table": "track-points"
     },
     {
-      "columns": ["id"],
+      "columns": [
+        "id"
+      ],
       "nameExplicit": false,
       "name": "activities_pkey",
       "schema": "cyclemetric",
@@ -292,7 +330,9 @@
       "entityType": "pks"
     },
     {
-      "columns": ["id"],
+      "columns": [
+        "id"
+      ],
       "nameExplicit": false,
       "name": "track-points_pkey",
       "schema": "cyclemetric",
@@ -300,12 +340,25 @@
       "entityType": "pks"
     },
     {
-      "columns": ["id"],
+      "columns": [
+        "id"
+      ],
       "nameExplicit": false,
       "name": "users_pkey",
       "schema": "cyclemetric",
       "table": "users",
       "entityType": "pks"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "login"
+      ],
+      "nullsNotDistinct": false,
+      "name": "users_login_key",
+      "schema": "cyclemetric",
+      "table": "users",
+      "entityType": "uniques"
     }
   ],
   "renames": []
